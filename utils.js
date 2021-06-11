@@ -1,8 +1,15 @@
 const csv = require("csv-parser");
 const fs = require("fs");
+const path = require("path");
 
 const ObjectsToCsv = require("objects-to-csv");
 
+const getAbsPath = (path) => {
+  return path.resolve(path);
+};
+const pathExists = (path) => {
+  return fs.existsSync(path);
+};
 const readCsv = (path) => {
   return new Promise((resolve, reject) => {
     const results = [];
@@ -46,7 +53,7 @@ const getPuppeteerBrowser = (headless) => {
 };
 const deepClone = (object) => {
   return JSON.parse(JSON.stringify(object));
-}
+};
 const sleep = (ms) => {
   return new Promise((resolve, reject) => {
     setTimeout(resolve, ms);
@@ -62,5 +69,7 @@ module.exports = {
   getPuppeteerBrowser,
   getDomParser,
   sleep,
-  deepClone 
+  deepClone,
+  getAbsPath,
+  pathExists,
 };
